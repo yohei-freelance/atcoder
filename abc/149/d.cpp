@@ -22,19 +22,22 @@ int main(){
     point['r'] = p;
     point['s'] = r;
     point['p'] = s;
+    map<char, char> rsp;
+    rsp['r'] = 's';
+    rsp['s'] = 'p';
+    rsp['p'] = 'r';
+    // 貪欲法
     for (ll i=0; i<k; i++){
         tmp = sub_problem(t, k, i);
         for(ll j=0; j<tmp.length(); j++){
             if(tmp[j] != memory){
                 ans += point[tmp[j]];
-            }else{
-                tmp[j+1]
+                memory = tmp[j];
+            }else if(j != tmp.length()){
+                memory = rsp[tmp[j+1]];
             }
-            memory = tmp[j];
         }
     }
-    cout << sub_problem(t, k, 0) << endl;
-    cout << sub_problem(t, k, 1) << endl;
     cout << ans << endl;
     return 0;
 }
