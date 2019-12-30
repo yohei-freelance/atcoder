@@ -17,7 +17,6 @@ int main(){
     str t; cin >> t;
     ll ans = 0;
     str tmp;
-    char memory = 'q';
     map<char, ll> point;
     point['r'] = p;
     point['s'] = r;
@@ -29,6 +28,7 @@ int main(){
     // 貪欲法
     for (ll i=0; i<k; i++){
         tmp = sub_problem(t, k, i);
+        char memory = 'q';
         for(ll j=0; j<tmp.length(); j++){
             if(tmp[j] != memory){
                 ans += point[tmp[j]];
