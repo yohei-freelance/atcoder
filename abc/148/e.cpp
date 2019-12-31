@@ -5,7 +5,7 @@ typedef string str;
 
 int main(){
     ll n; cin >> n;
-    ll ans;
+    ll ans = 0;
     if (n%2 == 1){
         cout << 0 << endl;
         return 0;
