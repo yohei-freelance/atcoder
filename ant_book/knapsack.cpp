@@ -10,13 +10,13 @@
 using namespace std;
 typedef long long ll;
 typedef string str;
- 
+
 int rec(int i, int j){
     int res;
     if (i == n){
         // no item left
         res = 0;
     } else if (j < W[i]){
-        
+
     }
 }
