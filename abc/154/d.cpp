@@ -1,5 +1,3 @@
-// doubleとfloatを間違えて, setprecisionが反映されなくて提出が遅れてしまった.
-
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
