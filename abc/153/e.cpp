@@ -1,9 +1,13 @@
+// DP
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 typedef string str;
+#define REP(i, n) for(int i=0; i<n; ++i)
+#define ALL(obj) (obj).begin(), (obj).end()
 using P = pair<int, int>;
-const ll inf =1e9;
+const int inf = 1e9;
+const ll INF = 1e18;
 const ll mod = 1e9+7;
 
 struct edge{
@@ -15,40 +19,24 @@ using graph = vector<vector<edge>>;
 int main(){
     ll h, n; cin >> h >> n;
     vector<ll> a(n);
+    ll max_damage = 0;
     vector<ll> b(n);
-    vector<double> perf(n);
-    for(ll i=0; i<n; i++){
+    REP(i, n){
         cin >> a[i] >> b[i];
-        perf[i] = a[i]/(double)b[i];
+        max_damage = max(a[i], max_damage);
     }
-    sort(perf.begin(), perf.end(), greater<ll>());
-    double tmp;
-    vector<ll> c(n);
-    vector<ll> d(n);
-    for(ll i=0; i<n; i++){
-        for(ll j=0; j<n; j++){
-            if(a[j]/(double)b[j] == perf[i]){
-                c[i] = a[j];
-                d[i] = b[j];
-            }
+    // vectorの長さは後で考える
+    vector<ll> dp(h+max_damage, INF);
+    dp[0] = 0;
+    REP(i, h){
+        REP(j, n){
+            dp[a[j]+i] = min(dp[a[j]+i], b[j]+dp[i]);
         }
     }
-    bool notdone = true;
-    ll mp = 0;
-    ll perf_idx = 0;
-    while(notdone){
-        if(h >= c[perf_idx]){
-            mp += d[perf_idx];
-            h -= c[perf_idx];
-        }else{
-            for(ll i=0; i<n; i++){
-                
-            }
-            perf_idx += 1;
-        }
-        if(h <= 0){
-            notdone = false;
-        }
+    ll ans = INF;
+    REP(i, max_damage){
+        ans = min(ans, dp[h+i]);
     }
-    cout << mp;
+    cout << ans << endl;
+    return 0;
 }
