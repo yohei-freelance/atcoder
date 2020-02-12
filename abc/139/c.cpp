@@ -2,8 +2,12 @@
 using namespace std;
 typedef long long ll;
 typedef string str;
+#define REP(i, n) for(int i=0; i<n; ++i)
+#define ALL(obj) (obj).begin(), (obj).end()
 using P = pair<int, int>;
-const int inf =1e9;
+const int inf = 1e9;
+const ll INF = 1e18;
+const ll mod = 1e9+7;
 
 struct edge{
     int to;
@@ -13,22 +17,23 @@ using graph = vector<vector<edge>>;
 
 int main(){
     int n; cin >> n;
-    vector<int> h(n);
-    int ans, tmp_ans = 0;
-    for(int i=0; i<n; i++){
+    vector<ll> h(n);
+    REP(i, n){
         cin >> h[i];
     }
-    int cur_step = h[0];
+    int cur_height = h[0];
+    int ans = 0;
+    int tmp_ans = 0;
     for(int i=1; i<n; i++){
-        if(cur_step >= h[i]){
+        if(h[i]<=cur_height){
             tmp_ans += 1;
-            cur_step = h[i];
         }else{
-            ans = max(tmp_ans, ans);
+            ans = max(ans, tmp_ans);
             tmp_ans = 0;
-            cur_step = h[i];
         }
+        cur_height = h[i];
     }
+    ans = max(ans, tmp_ans);
     cout << ans << endl;
     return 0;
 }
