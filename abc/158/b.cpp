@@ -14,3 +14,13 @@ struct edge{
     int cost;
 };
 using graph = vector<vector<edge>>;
+
+int main(){
+    ll n, b, r; cin >> n >> b >> r;
+    ll unit = b + r;
+    ll ans = n / unit * b;
+    if(n % unit <= b) ans += n % unit;
+    else ans += b;
+    cout << ans << endl; 
+    return 0;
+}

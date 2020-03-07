@@ -14,3 +14,7 @@ struct edge{
     int cost;
 };
 using graph = vector<vector<edge>>;
+
+int main(){
+    return 0;
+}

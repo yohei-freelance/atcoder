@@ -14,6 +14,7 @@ struct edge{
     int to;
     int cost;
 };
+
 using graph = vector<vector<edge>>;
 
 ll PowMod_RepeatSquaring(ll N, ll P, ll M){
@@ -39,7 +40,9 @@ ll modinv(ll a, ll m) {
 
 int main(){
     ll n, a, b; cin >> n >> a >> b;
-    ll ans = PowMod_RepeatSquaring(2, n, MOD) - 1;
+    ll ans = PowMod_RepeatSquaring(2, n, MOD);
+    ans -= 1;
+    ans %= MOD;
     // nCaとnCbを求める
     ll a_fact = 1;
     ll b_fact = 1;

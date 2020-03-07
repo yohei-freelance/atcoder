@@ -14,3 +14,12 @@ struct edge{
     int cost;
 };
 using graph = vector<vector<edge>>;
+
+int main(){
+    map<str, int> voc;
+    str tmp;
+    REP(i, n){
+        cin >> tmp;
+        
+    }
+}
