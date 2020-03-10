@@ -16,6 +16,21 @@ struct edge{
 using graph = vector<vector<edge>>;
 
 int main(){
-    
+    str s; cin >> s;
+    bool hitachi = false;
+    if(s.size()%2 == 0){
+        hitachi = true;
+        for(int i=0; i<s.size()-1; i+=2){
+            if(s[i] != 'h' || s[i+1] != 'i'){
+                hitachi = false;
+            }
+        }
+    }
+    if(hitachi){
+        cout << "Yes" << endl;
+    }
+    else{
+        cout << "No" << endl;
+    }
     return 0;
 }
