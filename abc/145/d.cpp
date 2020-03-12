@@ -31,5 +31,5 @@ vector<vector<ll>> comb(int n, int r){
 
 int main(){
     int x, y; cin >> x >> y;
-
+    comb(x, y);
 }
