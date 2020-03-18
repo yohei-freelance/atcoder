@@ -3,8 +3,10 @@ using namespace std;
 typedef long long ll;
 typedef string str;
 using P = pair<int, int>;
-const ll inf =1e9;
-const int minus_inf = -1e9;
+const int inf = 1e9;
+const int MAX = 1e5+5;
+const ll MOD = 1e9+7;
+#define REP(i, n) for (int i = 0; i < (n); ++i)
 
 struct edge{
     int to;
@@ -14,43 +16,39 @@ using graph = vector<vector<edge>>;
 
 int main(){
     int n, k; cin >> n >> k;
-    priority_queue<int, vector<int>, greater<int>> que;
-    vector<int> v(n);
-    vector<int> v_rev(n);
-    int ans = minus_inf;
-    int tmp_ans = 0;
-    for(int i=0; i<n; i++){
-        cin >> v[i];
-        cin >> v_rev[n-i-1];
+    deque<int> dq;
+    priority_queue<int, vector<int>, greater<int>> pq;
+    int value;
+    REP(i, n){
+        cin >> value;
+        dq.push_back(value);
     }
-    for(int f=1; f<=k; f++){
-        // 左からl個, 右からr個をpqへ. l個を固定する.
-        for(int l=0; l<=f; l++){
-            if(l != 0){
-                for(int le=0; le<l; le++){
-                    que.push(v[le]);
+    int ans = 0;
+    int execute_num = min(n,k);
+    for(int i=0; i<=execute_num; i++){
+        for(int j=0; j<=execute_num-i; j++){
+            deque<int> dq_copy = dq;
+            priority_queue<int, vector<int>, greater<int>> pq;
+            for(int l=0; l<i; l++){
+                pq.push(dq_copy.front());
+                dq_copy.pop_front();
+            }
+            for(int l=0; l<j; l++){
+                pq.push(dq_copy.back());
+                dq_copy.pop_back();
+            }
+            for(int l=0; l<k-i-j; l++){
+                if(!pq.empty()){
+                    value = pq.top();
+                    if(value < 0) pq.pop();
                 }
             }
-            if(f-l != 0){
-                for(int r=0; r<f-l; r++){
-                    que.push(v_rev[r]);
-                }
-            }
-            for(int d=0; d<k-f; d++){
-                if(que.top() < 0){
-                    cout << que.top();
-                    que.pop();
-                }else{
-                    break;
-                }
-            }
-            cout << que.size() << endl;
-            while(!que.empty()){
-                tmp_ans += que.top();
-                que.pop();
+            int tmp_ans = 0;
+            while(!pq.empty()){
+                tmp_ans += pq.top();
+                pq.pop();
             }
             ans = max(ans, tmp_ans);
-            tmp_ans = 0;
         }
     }
     cout << ans << endl;

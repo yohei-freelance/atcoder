@@ -15,17 +15,23 @@ struct edge{
 };
 using graph = vector<vector<edge>>;
 
-vector<ll> b;
-vector<ll> p;
-
-void bp_make(ll level){
-    if(level == 0){
-        b.
-    }
-}
-
 int main(){
-    ll n, x; cin >> n >> x;
-
+    int n, x; cin >> n >> x;
+    vector<int> m;
+    int tmp;
+    int gram = 0;
+    int ans = 0;
+    REP(i, n){
+        cin >> tmp;
+        m.push_back(tmp);
+        gram += tmp;
+        ans += 1;
+    }
+    sort(ALL(m));
+    while(gram <= x){
+        gram += m[0];
+        ans += 1;
+    }
+    cout << ans-1 << endl;
     return 0;
 }

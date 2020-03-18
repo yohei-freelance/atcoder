@@ -9,6 +9,10 @@ const int inf = 1e9;
 const ll INF = 1e18;
 const ll MOD = 1e9+7;
 const ll MAX = 1e9+7;
+template<typename T> int factorial(T n){
+  if(n==1) return 1;
+  else return n*factorial(n-1);
+}
 
 struct edge{
     int to;
@@ -38,8 +42,8 @@ int main(){
       ans += (double)sqrt(pow(x[next_city]-x[cur_city], 2)+pow(y[next_city]-y[cur_city], 2));
     }
     num_ways++;
-  } while (next_permutation(city_arange.begin(), city_arange.end()));
-  ans /= num_ways;
+  } while (next_permutation(city_arange.begin(), city_arange.end())); 
+  ans /= (double)factorial<int>(n);
   cout << setprecision(11) << ans << endl;
   return 0;
 }

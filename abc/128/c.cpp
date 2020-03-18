@@ -3,8 +3,10 @@ using namespace std;
 typedef long long ll;
 typedef string str;
 using P = pair<int, int>;
-const int inf =1e9;
-const int minus_inf = -1e9;
+const ll inf = 1e9;
+const int MAX = 1e5+5;
+const ll MOD = 1e9+7;
+#define REP(i, n) for (int i = 0; i < (n); ++i)
 
 struct edge{
     int to;
@@ -12,29 +14,44 @@ struct edge{
 };
 using graph = vector<vector<edge>>;
 
-// bit全探索
 int main(){
     int n, m; cin >> n >> m;
-    int switch(m)(n) = 0;
-    vector<int> k(m);
-    vector<int> p(m);
-    for(int i=0; i<m; i++){
-        cin >> k[i];
-        for(int j=0; j<k[i]; j++){
-            int tmp; cin >> tmp;
-            switch[i][tmp-1] = 1;
+    int tmp;
+    int vec_tmp;
+    vector<vector<int>> s(m);
+    REP(i, m){
+        cin >> tmp;
+        REP(j, tmp){
+            cin >> vec_tmp;
+            s[i].push_back(vec_tmp);
         }
     }
-    for(int i=0; i<m; i++){
-        cin >> p[i];
+    vector<int> p;
+    REP(i, m){
+        cin >> tmp;
+        p.push_back(tmp);
     }
-    for (int bit = 0; bit < (1<<m); ++bit) {
-        vector<int> S;
-        for (int i = 0; i < n; ++i) {
-            if (bit & (1<<i)) {
-                S.push_back(i);
+    int ans = 0;
+    int tmp_ans = 0;
+    bool all_on;
+    // bit全探索
+    for(int bit=0; bit<(1<<n); bit++){
+        vector<int> S(n, 0);
+        for(int i=0; i<n; i++){
+            if(bit & (1<<i)){
+                S[i] = 1;
             }
         }
-        cout << bit << endl;
+        all_on = true;
+        for(int i=0; i<m; i++){
+            tmp_ans = 0;
+            for(int j=0; j<s[i].size(); j++){
+                if(S[s[i][j]-1] == 1) tmp_ans++;
+            }
+            if(tmp_ans%2!=p[i]) all_on = false;
+        }
+        if(all_on) ans++;
     }
+    cout << ans << endl;
+    return 0;
 }

@@ -6,13 +6,15 @@ typedef string str;
 // bit全探索
 void main(){
     int n; cin >> n;
+    int ans = 0;
     vector<int> a(n);
+    vector<vector<int>> testimony(n, vector<int>);
+    REP(i, n){
+        cin >> a[i];
+        REP(j, a[i]){
 
-    for(int bit=0; bit < (1<<n); bit++){
-        for(int i=0; i<n; i++){
-            a[i] = -1;
+            testimony[i].insert([])
         }
-        
     }
     
 }

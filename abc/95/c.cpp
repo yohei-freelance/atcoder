@@ -15,17 +15,12 @@ struct edge{
 };
 using graph = vector<vector<edge>>;
 
-vector<ll> b;
-vector<ll> p;
-
-void bp_make(ll level){
-    if(level == 0){
-        b.
-    }
-}
-
 int main(){
-    ll n, x; cin >> n >> x;
-
+    int a, b, c, x, y; cin >> a >> b >> c >> x >> y;
+    int ans = inf;
+    for(int i=0; i<=max(x,y)*2; i+=2){
+        ans = min(ans, c*i+max(0, x-i/2)*a+max(0, y-i/2)*b);
+    }
+    cout << ans << endl;
     return 0;
 }

@@ -16,29 +16,25 @@ using graph = vector<vector<edge>>;
 
 int main(){
     int n, m; cin >> n >> m;
-    vector<int> a(n, -1);
-    int s, c;
-    if(m == 0){
-        cout << pow(10, n-1) << endl;
-        return 0;
-    }
+    vector<int> s(n, -1);
+    int digit, num;
+    bool error = false;
+    int ans = 0;
     REP(i, m){
-        cin >> s >> c;
-        if(a[s-1] == -1) a[s-1] = c;
-        else if(a[s-1] != c){
-            cout << -1 << endl;
-            return 0;
+        cin >> digit >> num;
+        if(s[digit-1] == -1) s[digit-1] = num;
+        else if(s[digit-1] != num){
+            error = true;
+            break;
         }
     }
-    if(n != 1 && a[0] == 0){
-        cout << -1 << endl;
-        return 0;
-    }
-    int ans = 0;
+    if(s[0] == 0 && n >= 2) error = true;
     REP(i, n){
-        if(i == 0 && n != 1 && a[i] == 0) ans += pow(10, n-1-i);
-        else if(a[i] != -1) ans += a[i] * pow(10, n-1-i);
+        if(i == 0 && s[i] == -1 && n >= 2) ans += pow(10, n-1);
+        else if(s[i] != -1) ans += s[i] * pow(10, n-1-i);
+        else continue;
     }
-    cout << ans << endl;
+    if(!error) cout << ans << endl;
+    else cout << -1 << endl;
     return 0;
 }
